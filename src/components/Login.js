@@ -26,7 +26,10 @@ export default class Login extends Component {
        body: JSON.stringify( { auth: { email, password } })
     })
 
-    console.log(await res.json());
+    const json = await res.json()
+    console.log("RESPONSE JSON>>>", json);
+    localStorage.setItem('token', json.jwt)
+
   }
 
   render() {

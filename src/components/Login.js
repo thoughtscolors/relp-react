@@ -35,8 +35,10 @@ export default class Login extends Component {
         const json = await res.json()
         console.log("RESPONSE JSON>>>", json);
         localStorage.setItem('token', json.jwt)
+        // console.log(this.props);
+        this.props.history.push('/restaurants')
       }
-      
+
     } catch (error) {
       console.log(error);
       this.setState({ errors: ['Something went wrong :('] })

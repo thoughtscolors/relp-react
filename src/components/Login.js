@@ -3,18 +3,20 @@ import {
   Button,
   Input,
   FormGroup,
+  Form,
   Label
 } from 'reactstrap'
 
 export default class Login extends Component {
 
   state = {
-    email: undefined,
-    password: undefined
+    email: '',
+    password: ''
   }
 
-  handleSubmit = async () => {
+  handleSubmit = async (e) => {
     const { email, password } = this.state
+    e.preventDefault()
 
     const res = await fetch('http://localhost:3000/user_token', {
       method: 'POST',
@@ -33,21 +35,36 @@ export default class Login extends Component {
 
     return (
       <div className="container">
-        <div className="form">
+        <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Label for="email">Email</Label>
-            <Input  value={email}
-                    onChange={(event) => this.setState({ email: event.target.value })}/>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              value={email}
+              type="email"
+              className="form-control"
+              required
+              onChange={(event) => this.setState({ email: event.target.value })}
+            />
           </FormGroup>
           <FormGroup>
-            <Label for="password">Password</Label>
-            <Input value={password}
-                   onChange={(event) => this.setState({ password: event.target.value })}/>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              value={password}
+              type="password"
+              className="form-control"
+              minLength={8}
+              required
+              onChange={(event) => this.setState({ password: event.target.value })}
+            />
           </FormGroup>
 
-          <Button color="primary" size="lg" block onClick={this.handleSubmit}>Login</Button>
-          <Button color="secondary" size="lg" block href={'/signup'}>Signup</Button>
-        </div>
+          <Button color="primary" size="lg" block>
+            Login
+          </Button>
+          <Button color="secondary" size="lg" block href={'/signup'}>
+            Signup
+          </Button>
+        </Form>
       </div>
     )
   }

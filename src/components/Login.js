@@ -4,32 +4,43 @@ import {
   Input,
   FormGroup,
   Form,
-  Label
+  Label,
+  Alert
 } from 'reactstrap'
 
 export default class Login extends Component {
 
   state = {
     email: '',
-    password: ''
+    password: '',
+    errors: []
   }
 
   handleSubmit = async (e) => {
-    const { email, password } = this.state
-    e.preventDefault()
+    try {
+      const { email, password } = this.state
+      e.preventDefault()
 
-    const res = await fetch('http://localhost:3000/user_token', {
-      method: 'POST',
-      headers: {
-           "Content-Type": "application/json",
-       },
-       body: JSON.stringify( { auth: { email, password } })
-    })
+      const res = await fetch('http://localhost:3000/user_token', {
+        method: 'POST',
+        headers: {
+             "Content-Type": "application/json",
+         },
+         body: JSON.stringify( { auth: { email, password } })
+      })
 
-    const json = await res.json()
-    console.log("RESPONSE JSON>>>", json);
-    localStorage.setItem('token', json.jwt)
-
+      if (res.status === 404) {
+        this.setState({ errors: ['Wrong email or password'] })
+      } else {
+        const json = await res.json()
+        console.log("RESPONSE JSON>>>", json);
+        localStorage.setItem('token', json.jwt)
+      }
+      
+    } catch (error) {
+      console.log(error);
+      this.setState({ errors: ['Something went wrong :('] })
+    }
   }
 
   render() {
@@ -38,6 +49,17 @@ export default class Login extends Component {
 
     return (
       <div className="container">
+
+        {this.state.errors.length > 0 && <div>
+          <Alert color="danger">
+            <ul>
+              {this.state.errors.map(error => (
+                <li>{error}</li>
+              ))}
+            </ul>
+          </Alert>
+        </div>}
+
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label htmlFor="email">Email</Label>

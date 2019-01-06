@@ -9,17 +9,32 @@ import NavBar from './components/NavBar'
 export default class App extends Component {
 
   state = {
-    loggedIn: true
+    loggedIn: false
+  }
+
+  logout = async () => {
+    localStorage.removeItem('token')
+    this.setState({ loggedIn: false })
+  }
+
+  setLoggedIn = () => {
+    this.setState({ loggedIn: true })
   }
 
   render() {
     return (
       <Router>
         <div>
-          <NavBar loggedIn={this.state.loggedIn}/>
-          <Route path="/" exact component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/restaurants" component={Restaurants} />
+          <NavBar loggedIn={this.state.loggedIn} logout={this.logout}/>
+          <Route
+            path="/" exact
+            render={(props) => <Login {...props} setLoggedIn={this.setLoggedIn}/>}
+          />
+          <Route
+            path="/signup" exact
+            render={(props) => <Signup {...props} setLoggedIn={this.setLoggedIn}/>}
+          />
+          <Route path="/restaurants" exact component={Restaurants} />
         </div>
       </Router>
     )

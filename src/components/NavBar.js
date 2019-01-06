@@ -31,8 +31,9 @@ export default class NavBar extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             {this.props.loggedIn ?
               <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink onClick={this.props.logout}>Logout</NavLink>
+                <NavItem onClick={this.props.logout}>
+                  {/*this logout function on click makes it redirect to signup, but does clear localStorage*/}
+                  <NavLink href='/'>Logout</NavLink>
                 </NavItem>
               </Nav>
             : <Nav className="ml-auto" navbar>

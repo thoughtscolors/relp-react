@@ -36,7 +36,7 @@ export default class App extends Component {
             render={(props) => <Signup {...props} setLoggedIn={this.setLoggedIn}/>}
           />
           <Route path="/restaurants" exact component={Restaurants} />
-          <Route path="/restaurants/" component={Restaurant} />
+          <Route path="/restaurants/:id" component={Restaurant} />
         </div>
       </Router>
     )

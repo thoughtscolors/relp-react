@@ -7,7 +7,26 @@ import Moment from 'react-moment';
 export default class Restaurant extends Component {
 
   state = {
+    restaurant: {},
     reviews: []
+  }
+
+  fetchRestaurant = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      const id = this.props.match.params.id
+
+      const res = await fetch(`http://localhost:3000/restaurants/${id}`, {
+        method: 'GET',
+        headers: {
+          "Authorization": `Bearer ${token}`
+         }
+      })
+      const restaurant = await res.json()
+      this.setState({ restaurant })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   fetchReviews = async () => {
@@ -29,6 +48,7 @@ export default class Restaurant extends Component {
   }
 
   componentDidMount = () => {
+    this.fetchRestaurant()
     this.fetchReviews()
   }
 
@@ -45,12 +65,12 @@ export default class Restaurant extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.state)
     const { reviews } = this.state
     return (
       <div className="container">
         <div style={{ textAlign: "center" }}>
-          <h1> {/*TODO: restaurant name and details*/} </h1>
+          <h1> {this.state.restaurant.name} </h1>
         </div>
         <div>
           {reviews.length > 0 &&

@@ -7,11 +7,16 @@ import Restaurants from './components/Restaurants'
 import NavBar from './components/NavBar'
 
 export default class App extends Component {
+
+  state = {
+    loggedIn: true
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <NavBar/>
+          <NavBar loggedIn={this.state.loggedIn}/>
           <Route path="/" exact component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/restaurants" component={Restaurants} />

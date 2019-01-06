@@ -32,7 +32,7 @@ export default class NavBar extends Component {
             {this.props.loggedIn ?
               <Nav className="ml-auto" navbar>
                 <NavItem onClick={this.props.logout}>
-                  {/* TODO: this logout function on click makes it redirect to signup, but does clear localStorage*/}
+                  {/* TODO: this logout function on click makes it incorrectly redirect to signup, but does clear localStorage*/}
                   <NavLink href='/'>Logout</NavLink>
                 </NavItem>
               </Nav>

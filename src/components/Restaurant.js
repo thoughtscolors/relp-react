@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   Media
 } from 'reactstrap'
+import Moment from 'react-moment';
 
 export default class Restaurant extends Component {
 
@@ -61,7 +62,7 @@ export default class Restaurant extends Component {
                   </Media>
                     {review.content}
                     <div>
-                      {review.created_at}
+                      <Moment fromNow>{review.created_at}</Moment>
                     </div>
                 </Media>
               </Media>

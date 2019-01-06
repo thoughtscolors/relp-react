@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReviewItem from './partials/ReviewItem'
+import RestaurantListItem from './partials/RestaurantListItem'
 
 export default class Restaurant extends Component {
 
@@ -50,12 +51,12 @@ export default class Restaurant extends Component {
   }
 
   render() {
-    const { reviews } = this.state
-    
+    const { reviews, restaurant } = this.state
+
     return (
       <div className="container">
-        <div style={{ textAlign: "center" }}>
-          <h1> {this.state.restaurant.name} </h1>
+        <div>
+          <RestaurantListItem restaurant={restaurant}/>
         </div>
         <div>
           {reviews.length > 0 &&

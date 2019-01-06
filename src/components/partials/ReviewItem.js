@@ -1,13 +1,44 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
-  Media
+  Media,
+  Button
 } from 'reactstrap'
 import Moment from 'react-moment';
 import { Star, Egg } from './Icons'
+import Comment from './Comment'
 
-const ReviewItem = (props) => {
-  const { review } = props
-  
+export default class ReviewItem extends Component {
+
+  state = {
+    comments: []
+  }
+
+  fetchComments = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      const { restaurant_id, id}  = this.props.review
+
+      const res = await fetch(`http://localhost:3000/restaurants/${restaurant_id}/reviews/${id}/comments`, {
+        method: 'GET',
+        headers: {
+          "Authorization": `Bearer ${token}`
+         }
+      })
+      const comments = await res.json()
+      this.setState({ comments })
+      console.log(this.state);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  clearComments = () => {
+    this.setState({ comments: [] })
+  }
+
+  render() {
+    const { review } = this.props
+    console.log(this.props);
   return (
     <Media key={review.id} style={{margin: 20, border: "1px solid grey"}}>
       <Media left href="#">
@@ -25,9 +56,25 @@ const ReviewItem = (props) => {
           <div>
             <Moment fromNow>{review.created_at}</Moment>
           </div>
-      </Media>
-    </Media>
-  )
-}
+          <div>
+          {this.state.comments.length === 0 &&
+            <Button color="secondary" size="md" onClick={() => this.fetchComments(review.id)}>
+              Show Comments
+            </Button>
+          }
 
-export default ReviewItem
+          {this.state.comments.length > 0 &&
+            <div>
+              <Button color="secondary" size="md" onClick={() => this.clearComments()}>
+                Hide Comments
+              </Button>
+              {this.state.comments.map(comment => <Comment comment={comment} key={comment.id}/>)}
+            </div>
+
+          }
+          </div>
+      </Media>
+
+    </Media>
+  )}
+}

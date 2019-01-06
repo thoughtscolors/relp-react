@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   Media
 } from 'reactstrap'
+import { Link } from 'react-router-dom'
 
 export default class Restaurants extends Component {
 
@@ -48,7 +49,7 @@ export default class Restaurants extends Component {
               </Media>
               <Media body>
                 <Media heading>
-                  {restaurant.name}
+                  <Link to={`/restaurants/${restaurant.id}`}>{restaurant.name}</Link>
                 </Media>
                   {restaurant.description}
                 <Media>

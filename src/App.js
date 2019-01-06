@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Restaurants from './components/Restaurants'
+import Restaurant from './components/Restaurant'
 import NavBar from './components/NavBar'
 
 export default class App extends Component {
@@ -35,6 +36,7 @@ export default class App extends Component {
             render={(props) => <Signup {...props} setLoggedIn={this.setLoggedIn}/>}
           />
           <Route path="/restaurants" exact component={Restaurants} />
+          <Route path="/restaurants/" component={Restaurant} />
         </div>
       </Router>
     )

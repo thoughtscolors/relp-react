@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom'
 
 const RestaurantListItem = (props) => {
   const { restaurant } = props
-  
+
   return (
-    <Media key={restaurant.id} style={{margin: 20}}>
+    <Media className="box" key={restaurant.id}>
       <Media left href="#">
-        <Media object src="https://resizer.otstatic.com/v2/photos/medium/24162862.jpg"
+        <Media object src="https://previews.123rf.com/images/dmitrymoi/dmitrymoi1702/dmitrymoi170200016/71707598-restaurant-or-cafe-exterior-building-vector-cartoon-illustration.jpg"
         style={{width: 120, height: 120, marginRight: '2vw'}} alt={restaurant.name + " image"} />
       </Media>
       <Media body>

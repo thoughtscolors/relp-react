@@ -26,7 +26,7 @@ export default class ReviewItem extends Component {
       })
       const comments = await res.json()
       this.setState({ comments })
-      console.log(this.state);
+
     } catch (error) {
       console.log(error);
     }
@@ -38,9 +38,9 @@ export default class ReviewItem extends Component {
 
   render() {
     const { review } = this.props
-    console.log(this.props);
+
   return (
-    <Media key={review.id} style={{margin: 20, border: "1px solid grey"}}>
+    <Media className="box" key={review.id}>
       <Media left href="#">
         <Media object src="https://cdn1.iconfinder.com/data/icons/female-avatars-vol-1/256/female-portrait-avatar-profile-woman-sexy-redhead-512.png"
         style={{width: 120, height: 120, marginRight: '2vw'}} alt={review.user_id + " image"} />

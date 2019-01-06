@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Restaurants from './components/Restaurants'
 import Restaurant from './components/Restaurant'
-import NavBar from './components/NavBar'
+import NavBar from './components/shared/NavBar'
 
 export default class App extends Component {
 

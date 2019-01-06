@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 const RestaurantListItem = (props) => {
   const { restaurant } = props
+  
   return (
     <Media key={restaurant.id} style={{margin: 20}}>
       <Media left href="#">

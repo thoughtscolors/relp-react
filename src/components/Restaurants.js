@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Media
-} from 'reactstrap'
-import { Link } from 'react-router-dom'
-import RestaurantListItem from './RestaurantListItem'
+import RestaurantListItem from './partials/RestaurantListItem'
 
 export default class Restaurants extends Component {
 
@@ -43,7 +39,7 @@ export default class Restaurants extends Component {
         <div>
         {restaurants.length > 0 &&
           restaurants.map(restaurant => (
-            <RestaurantListItem restaurant={restaurant}/>
+            <RestaurantListItem restaurant={restaurant} key={restaurant.id}/>
           )) }
         </div>
       </div>

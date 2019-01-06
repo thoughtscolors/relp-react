@@ -13,8 +13,9 @@ export default class Restaurant extends Component {
   fetchReviews = async () => {
     try {
       const token = localStorage.getItem('token')
+      const id = this.props.match.params.id
 
-      const res = await fetch(`http://localhost:3000/restaurants/1/reviews`, {
+      const res = await fetch(`http://localhost:3000/restaurants/${id}/reviews`, {
         method: 'GET',
         headers: {
           "Authorization": `Bearer ${token}`
@@ -32,7 +33,10 @@ export default class Restaurant extends Component {
   }
 
   createStars = (numberOfStars) => {
-    const star = <img src='https://vignette.wikia.nocookie.net/nintendo/images/0/0d/Artwork_-_SUPER_STAR_%28Simple%29.svg/revision/latest/scale-to-width-down/502?cb=20160716213643&path-prefix=en' style={{width: 20, height: 20}} alt="star"/>
+    if (numberOfStars === 0) {
+      return [<img src='https://cdn1.iconfinder.com/data/icons/cute-egg-emoji-in-different-expressions/200/EGG7-512.png' style={{width: 30, height: 30}} alt="star"/>]
+    }
+    const star = <img src='https://vignette.wikia.nocookie.net/nintendo/images/0/0d/Artwork_-_SUPER_STAR_%28Simple%29.svg/revision/latest/scale-to-width-down/502?cb=20160716213643&path-prefix=en' style={{width: 30, height: 30}} alt="star"/>
     let stars = []
     for (var i = 0; i < numberOfStars; i++) {
       stars.push(star)
@@ -41,7 +45,7 @@ export default class Restaurant extends Component {
   }
 
   render() {
-
+    console.log(this.props);
     const { reviews } = this.state
     return (
       <div className="container">

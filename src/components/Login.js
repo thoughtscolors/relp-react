@@ -61,7 +61,9 @@ export default class Login extends Component {
             </ul>
           </Alert>
         </div>}
-
+        <div className="w100 text-center">
+          <img src='https://i.pinimg.com/originals/b2/76/af/b276af58ff041b951321765eec87ce29.png' style={{height: "120px"}} alt="pizza-spinning"/>
+        </div>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label htmlFor="email">Email</Label>

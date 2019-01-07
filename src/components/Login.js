@@ -35,7 +35,7 @@ export default class Login extends Component {
         const json = await res.json()
         console.log("RESPONSE JSON>>>", json);
         localStorage.setItem('token', json.jwt)
-        // console.log(this.props);
+        this.props.setLoggedIn()
         this.props.history.push('/restaurants')
       }
 

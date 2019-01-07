@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Media
-} from 'reactstrap'
+import RestaurantListItem from './partials/RestaurantListItem'
 
 export default class Restaurants extends Component {
 
@@ -41,26 +39,7 @@ export default class Restaurants extends Component {
         <div>
         {restaurants.length > 0 &&
           restaurants.map(restaurant => (
-            <Media key={restaurant.id} style={{margin: 20}}>
-              <Media left href="#">
-                <Media object src="https://resizer.otstatic.com/v2/photos/medium/24162862.jpg"
-                style={{width: 120, height: 120, marginRight: '2vw'}} alt={restaurant.name + " image"} />
-              </Media>
-              <Media body>
-                <Media heading>
-                  {restaurant.name}
-                </Media>
-                  {restaurant.description}
-                <Media>
-                </Media>
-                  {`${restaurant.address} ${restaurant.city}, ${restaurant.state} ${restaurant.zip}`}
-                <Media>
-                </Media>
-                  {restaurant.phone}
-                <Media>
-                </Media>
-              </Media>
-            </Media>
+            <RestaurantListItem restaurant={restaurant} key={restaurant.id}/>
           )) }
         </div>
       </div>

@@ -1,6 +1,15 @@
 .container {
   width: 60vw !important;
-  margin-top: calc(100vh * .20)
+  margin-top: calc(100vh * .15)
+}
+
+/* list items like restaurants, reviews, comments */
+.box {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  border-radius: 0.5em;
+  box-shadow: 2px 4px 6px #EEEEEE;
 }
 
 .App-logo {

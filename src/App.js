@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import OwnerHomePage from './components/OwnerHomePage'
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -63,8 +63,7 @@ export default class App extends Component {
 
     res.json().then(users => users.forEach(user => {
       if (user.email === email && user.owner) {
-        this.setState({ owner: true, user }, () => {
-          this.setLoggedIn();
+        this.setState({ owner: true, loggedIn: true, user }, () => {
           owner = true;
         })
       }
@@ -85,10 +84,11 @@ export default class App extends Component {
   }
 
   render() {
+    const { loggedIn, user } = this.state;
     return (
       <Router>
         <div>
-          <NavBar loggedIn={this.state.loggedIn} logout={this.logout} />
+          <NavBar loggedIn={loggedIn} logout={this.logout} />
           <Route
             path="/" exact
             render={(props) => this.renderHome(props)}
@@ -99,7 +99,10 @@ export default class App extends Component {
           />
           <Route path="/restaurants" exact component={Restaurants} />
           <Route path="/restaurants/:id" component={Restaurant} />
-          <Route path="/addrestaurant" component={CreateRestaurant} />
+          <Route 
+            path="/addrestaurant" exact
+            render={(props) => <CreateRestaurant {...props} loggedIn={loggedIn} userId={user.id}/>}
+          />
           <Route path="/search" component={SearchPage} />
         </div>
       </Router>

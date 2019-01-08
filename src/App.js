@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Home from './components/Home'
+import OwnerHomePage from './components/OwnerHomePage'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import CreateRestaurant from './components/CreateRestaurant'
 import Restaurants from './components/Restaurants'
 import Restaurant from './components/Restaurant'
 import NavBar from './components/shared/NavBar'
@@ -13,7 +14,8 @@ export default class App extends Component {
 
   state = {
     loggedIn: false,
-    owner: false
+    owner: false,
+    user: null,
   }
 
   logout = async () => {
@@ -36,14 +38,18 @@ export default class App extends Component {
 
     res.json().then(users => users.forEach(user => {
       if (user.email === email && user.owner) {
-        this.setState({ owner: true })
+        this.setState({ owner: true, user })
       }
     }));
   }
 
   renderHome = (props) => {
     if (this.state.loggedIn) {
-      return <Home owner={this.state.owner}/>
+      if (this.state.owner) {
+        return <OwnerHomePage user={this.state.user} {...props}/>
+      } else {
+        return <SearchPage />
+      }
     } else {
       return <Login {...props} setLoggedIn={this.setLoggedIn} checkOwner={this.checkOwner} />
     }
@@ -64,6 +70,7 @@ export default class App extends Component {
           />
           <Route path="/restaurants" exact component={Restaurants} />
           <Route path="/restaurants/:id" component={Restaurant} />
+          <Route path="/addrestaurant" component={CreateRestaurant} />
           <Route path="/search" component={SearchPage} />
         </div>
       </Router>

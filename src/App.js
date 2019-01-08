@@ -15,7 +15,7 @@ export default class App extends Component {
   state = {
     loggedIn: false,
     owner: false,
-    user: null,
+    user: {},
   }
 
   logout = async () => {
@@ -35,12 +35,17 @@ export default class App extends Component {
         "Authorization": `Bearer ${token}`
       }
     });
+    let owner = false;
 
     res.json().then(users => users.forEach(user => {
       if (user.email === email && user.owner) {
-        this.setState({ owner: true, user })
+        this.setState({ owner: true, user }, () => {
+          this.setLoggedIn();
+          owner = true;
+        })
       }
     }));
+    return owner;
   }
 
   renderHome = (props) => {

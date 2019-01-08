@@ -34,9 +34,13 @@ export default class Login extends Component {
       } else {
         const json = await res.json()
         console.log("RESPONSE JSON>>>", json);
-        localStorage.setItem('token', json.jwt)
-        this.props.checkOwner(email, this.props.setLoggedIn())
-        this.props.history.push('/')
+        localStorage.setItem('token', json.jwt);
+
+        const isOwner = await this.props.checkOwner(email);
+        if (!isOwner) {
+          this.props.setLoggedIn();
+        }
+        this.props.history.push('/');
       }
 
     } catch (error) {

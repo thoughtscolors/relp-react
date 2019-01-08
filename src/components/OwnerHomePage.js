@@ -26,13 +26,11 @@ export default class OwnerHomePage extends Component {
   }
   
   addRestaurant = () => {
-    console.log('clicked')
     this.props.history.push('/addrestaurant')
   }
 
   componentDidMount = () => {
     this.fetchRestaurants();
-    console.log(this.props)
   }
 
   render() {

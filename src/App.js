@@ -6,6 +6,7 @@ import Signup from './components/Signup'
 import Restaurants from './components/Restaurants'
 import Restaurant from './components/Restaurant'
 import NavBar from './components/shared/NavBar'
+import SearchPage from './components/SearchPage'
 
 export default class App extends Component {
 
@@ -37,6 +38,7 @@ export default class App extends Component {
           />
           <Route path="/restaurants" exact component={Restaurants} />
           <Route path="/restaurants/:id" component={Restaurant} />
+          <Route path="/search" component={SearchPage} />
         </div>
       </Router>
     )

@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom'
 const RestaurantListItem = (props) => {
   const { restaurant } = props
 
+  if (Object.keys(restaurant).length === 0) {
+    return null
+  }
+
   return (
     <Media className="box" key={restaurant.id}>
       <Media left href="#">

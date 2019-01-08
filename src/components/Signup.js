@@ -24,12 +24,15 @@ export default class Signup extends Component {
     const res = await fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: {
-           "Content-Type": "application/json",
-       },
-       body: JSON.stringify( { name, email, password, confirm_password, owner } )
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify( { name, email, password, confirm_password, owner } )
     })
 
-    console.log(await res.json());
+    res.json().then(user => {
+      this.props.signUpAndLogIn(user, password);
+      setTimeout(() => this.props.history.push('/'), 300);
+    })
   }
 
   render() {

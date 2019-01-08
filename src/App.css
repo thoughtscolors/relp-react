@@ -11,3 +11,7 @@
   border-radius: 0.5em;
   box-shadow: 2px 4px 6px #EEEEEE;
 }
+
+.nav-item {
+  padding-left: 20px;
+}

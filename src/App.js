@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import OwnerHomePage from './components/OwnerHomePage'
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -25,6 +25,30 @@ export default class App extends Component {
 
   setLoggedIn = () => {
     this.setState({ loggedIn: true })
+  }
+
+  signUpAndLogIn = async (user, password) => {
+    try {
+      const res = await fetch('http://localhost:3000/user_token', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ auth: { email: user.email, password } })
+      });
+
+      const token = await res.json()
+      console.log("RESPONSE JSON>>>", token);
+      localStorage.setItem('token', token.jwt);
+
+      const isOwner = await this.checkOwner(user.email);
+      if (!isOwner) {
+        this.setLoggedIn();
+      }
+    } catch(error) {
+      console.log(error);
+      this.setState({ errors: ['Something went wrong :('] })
+    }
   }
 
   checkOwner = async (email) => {
@@ -71,7 +95,7 @@ export default class App extends Component {
           />
           <Route
             path="/signup" exact
-            render={(props) => <Signup {...props} setLoggedIn={this.setLoggedIn}/>}
+            render={(props) => <Signup {...props} signUpAndLogIn={this.signUpAndLogIn}/>}
           />
           <Route path="/restaurants" exact component={Restaurants} />
           <Route path="/restaurants/:id" component={Restaurant} />

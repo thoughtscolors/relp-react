@@ -31,7 +31,9 @@ export default class SearchPage extends Component {
 
     return (
       <div className="container">
-        <Search search={this.fetchRestaurant}/>
+        <div className="box">
+          <Search search={this.fetchRestaurant}/>
+        </div>
         <RestaurantListItem restaurant={this.state.restaurant}/>
       </div>
     )

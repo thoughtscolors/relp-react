@@ -35,8 +35,9 @@ export default class Login extends Component {
         const json = await res.json()
         console.log("RESPONSE JSON>>>", json);
         localStorage.setItem('token', json.jwt)
+        this.props.checkOwner(email)
         this.props.setLoggedIn()
-        this.props.history.push('/restaurants')
+        this.props.history.push('/')
       }
 
     } catch (error) {
@@ -46,7 +47,6 @@ export default class Login extends Component {
   }
 
   render() {
-
     let { email, password } = this.state
 
     return (

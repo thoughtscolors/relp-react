@@ -53,8 +53,7 @@ export default class Restaurant extends Component {
 
   render() {
     const { reviews, restaurant } = this.state
-    console.log("PROPS IN RESTAURANT", this.props);
-    
+
     return (
       <div className="container">
         <div>

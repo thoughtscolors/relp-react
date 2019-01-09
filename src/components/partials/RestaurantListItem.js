@@ -92,7 +92,7 @@ export default class RestaurantListItem extends React.Component {
   render() {
     const { restaurant } = this.props;
     const { open, name, description, address, city, state, zip, phone } = this.state;
-    console.log('history',this.props.history)
+
     return (
       <Media className="box" key={restaurant.id}>
         <Modal open={open} onClose={this.onCloseModal} center>

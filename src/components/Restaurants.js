@@ -26,11 +26,9 @@ export default class Restaurants extends Component {
 
   componentDidMount = () => {
     this.fetchRestaurants()
-    console.log(this.props);
   }
 
   render() {
-    console.log('restaurants hisotry', this.props.history)
     const { restaurants } = this.state
     return (
       <div className="container">

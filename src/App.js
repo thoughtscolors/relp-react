@@ -66,6 +66,8 @@ export default class App extends Component {
         this.setState({ owner: true, loggedIn: true, user }, () => {
           owner = true;
         })
+      } else {
+        this.setState({ owner: false, loggedIn: true, user })
       }
     }));
     return owner;
@@ -76,7 +78,7 @@ export default class App extends Component {
       if (this.state.owner) {
         return <OwnerHomePage user={this.state.user} {...props}/>
       } else {
-        return <SearchPage />
+        return <Restaurants user={this.state.user} {...props} />
       }
     } else {
       return <Login {...props} setLoggedIn={this.setLoggedIn} checkOwner={this.checkOwner} />
@@ -97,9 +99,9 @@ export default class App extends Component {
             path="/signup" exact
             render={(props) => <Signup {...props} signUpAndLogIn={this.signUpAndLogIn}/>}
           />
-          <Route path="/restaurants" exact component={Restaurants} />
+          <Route path="/restaurants" exact render={(props) => <Restaurants/>} />
           <Route path="/restaurants/:id" component={Restaurant} />
-          <Route 
+          <Route
             path="/addrestaurant" exact
             render={(props) => <CreateRestaurant {...props} loggedIn={loggedIn} userId={user.id}/>}
           />

@@ -45,7 +45,7 @@ export default class OwnerHomePage extends Component {
         <div>
           {restaurants.length > 0 &&
             restaurants.map(restaurant => (
-              <RestaurantListItem restaurant={restaurant} key={restaurant.id} />
+              <RestaurantListItem restaurant={restaurant} key={restaurant.id} user={this.props.user} history={this.props.history}/>
             ))}
         </div>
       </div>

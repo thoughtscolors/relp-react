@@ -54,10 +54,11 @@ export default class Restaurant extends Component {
   render() {
     const { reviews, restaurant } = this.state
     console.log("PROPS IN RESTAURANT", this.props);
+    
     return (
       <div className="container">
         <div>
-          <RestaurantListItem restaurant={restaurant} />
+          <RestaurantListItem history={this.props.history} restaurant={restaurant} user={this.props.user} />
         </div>
         <div>
           {!this.props.user.owner &&

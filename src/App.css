@@ -3,6 +3,11 @@
   margin-top: calc(100vh * .1)
 }
 
+.restaurant-edit-modal-container {
+  width: 40vw;
+  margin-top: calc(100vh * .1)
+}
+
 /* list items like restaurants, reviews, comments */
 .box {
   margin: 20px;

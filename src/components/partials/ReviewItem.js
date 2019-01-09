@@ -6,6 +6,7 @@ import {
 import Moment from 'react-moment';
 import { Star, Egg } from './Icons'
 import Comment from './Comment'
+import { Link } from 'react-router-dom'
 
 export default class ReviewItem extends Component {
 
@@ -42,8 +43,10 @@ export default class ReviewItem extends Component {
   return (
     <Media className="box" key={review.id}>
       <Media left href="#">
-        <Media object src="https://cdn1.iconfinder.com/data/icons/female-avatars-vol-1/256/female-portrait-avatar-profile-woman-sexy-redhead-512.png"
-        style={{width: 120, height: 120, marginRight: '2vw'}} alt={review.user_id + " image"} />
+        <Link to={`/user/${review.user_id}`}>
+          <Media object src="https://cdn1.iconfinder.com/data/icons/female-avatars-vol-1/256/female-portrait-avatar-profile-woman-sexy-redhead-512.png"
+          style={{width: 120, height: 120, marginRight: '2vw'}} alt={review.user_id + " image"} />
+        </Link>
       </Media>
       <Media body>
         <Media heading>

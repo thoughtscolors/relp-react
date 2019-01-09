@@ -14,17 +14,12 @@ export default class App extends Component {
 
   state = {
     loggedIn: false,
-    owner: false,
     user: {},
   }
 
   logout = async () => {
     localStorage.removeItem('token')
     this.setState({ loggedIn: false })
-  }
-
-  setLoggedIn = () => {
-    this.setState({ loggedIn: true })
   }
 
   signUpAndLogIn = async (user, password) => {
@@ -41,17 +36,14 @@ export default class App extends Component {
       console.log("RESPONSE JSON>>>", token);
       localStorage.setItem('token', token.jwt);
 
-      const isOwner = await this.checkOwner(user.email);
-      if (!isOwner) {
-        this.setLoggedIn();
-      }
+      this.logIn(user.email);
     } catch(error) {
       console.log(error);
       this.setState({ errors: ['Something went wrong :('] })
     }
   }
 
-  checkOwner = async (email) => {
+  logIn = async (email) => {
     const token = localStorage.getItem('token')
     const res = await fetch('http://localhost:3000/users', {
       method: 'GET',
@@ -59,27 +51,26 @@ export default class App extends Component {
         "Authorization": `Bearer ${token}`
       }
     });
-    let owner = false;
 
     res.json().then(users => users.forEach(user => {
-      if (user.email === email && user.owner) {
-        this.setState({ owner: true, loggedIn: true, user }, () => {
-          owner = true;
-        })
+      if (user.email === email) {
+        console.log(user)
+        this.setState({ loggedIn: true, user })
       }
     }));
-    return owner;
   }
 
   renderHome = (props) => {
     if (this.state.loggedIn) {
-      if (this.state.owner) {
+      if (this.state.user.owner) {
+        console.log(this.state.user.owner)
         return <OwnerHomePage user={this.state.user} {...props}/>
       } else {
+        console.log(this.state.user, 'OMGGGG')
         return <SearchPage />
       }
     } else {
-      return <Login {...props} setLoggedIn={this.setLoggedIn} checkOwner={this.checkOwner} />
+      return <Login {...props} logIn={this.logIn} />
     }
   }
 

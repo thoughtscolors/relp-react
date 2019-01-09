@@ -14,7 +14,7 @@ export default class SearchPage extends Component {
       console.log('clicked');
       const token = localStorage.getItem('token')
 
-      const res = await fetch(`http://localhost:3000/restaurants/${searchTerm}`, {
+      const res = await fetch(`http://localhost:3000/restaurants/search/?q=${searchTerm}`, {
         method: 'GET',
         headers: {
           "Authorization": `Bearer ${token}`

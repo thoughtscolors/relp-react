@@ -20,7 +20,7 @@ export default class AddReview extends Component {
       e.preventDefault()
       const token = localStorage.getItem('token')
       const { restaurant_id, user } = this.props
-      const review  = {...this.state, user_id: 7, restaurant_id }
+      const review  = {...this.state, user_id: user.id, restaurant_id }
       console.log(JSON.stringify(review));
 
       const res = await fetch(`http://localhost:3000/restaurants/${restaurant_id}/reviews/`, {
@@ -32,7 +32,6 @@ export default class AddReview extends Component {
         body: JSON.stringify(review)
       })
       if (res.status === 201 ) {
-        // const response = await res.json()
         this.setState({ rating: 0, content: '' })
         this.props.fetchReviews()
       }

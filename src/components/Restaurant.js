@@ -60,7 +60,11 @@ export default class Restaurant extends Component {
           <RestaurantListItem restaurant={restaurant} />
         </div>
         <div>
-          <AddReview restaurant_id={restaurant.id} fetchReviews={this.fetchReviews} user={this.props.user}/>
+          {!this.props.user.owner &&
+            <AddReview
+            restaurant_id={restaurant.id}
+            fetchReviews={this.fetchReviews}
+            user={this.props.user}/> }
           {reviews.length > 0 &&
             reviews.map(review => (
               <ReviewItem review={review} key={review.id}/>

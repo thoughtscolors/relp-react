@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 import {
   Media,
-  Button
+  Button,
+  Input,
+  FormGroup,
+  Form,
+  Label
 } from 'reactstrap'
 import Moment from 'react-moment';
 import { Star, Egg } from './Icons'
 import Comment from './Comment'
+import Modal from 'react-responsive-modal';
 
 export default class ReviewItem extends Component {
 
   state = {
+    open: false,
     comments: []
   }
 
@@ -36,8 +42,30 @@ export default class ReviewItem extends Component {
     this.setState({ comments: [] })
   }
 
+  addCommentButton = () => {
+    const { user, restaurant, review } = this.props
+    if (user.id === restaurant.user_id && review.restaurant_id === restaurant.id) {
+      return <Button>Add Comment</Button>
+    }
+  }
+
+  addComment = async () => {
+
+    // fetch comments after adding comment
+  }
+
+
+  onOpenModal = () => {
+    this.setState({ open: true, ...this.props.restaurant });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+
+
   render() {
-    const { review } = this.props
+  const { review } = this.props
 
   return (
     <Media className="box" key={review.id}>
@@ -62,7 +90,7 @@ export default class ReviewItem extends Component {
               Show Comments
             </Button>
           }
-
+          {this.addCommentButton()}
           {this.state.comments.length > 0 &&
             <div>
               <Button color="secondary" size="md" onClick={() => this.clearComments()}>
@@ -70,7 +98,6 @@ export default class ReviewItem extends Component {
               </Button>
               {this.state.comments.map(comment => <Comment comment={comment} key={comment.id}/>)}
             </div>
-
           }
           </div>
       </Media>

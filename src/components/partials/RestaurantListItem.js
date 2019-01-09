@@ -82,7 +82,10 @@ export default class RestaurantListItem extends React.Component {
         })
       })
 
-      res.json().then(() => this.props.history.push(`/restaurants/${this.props.restaurant.id}`));
+      res.json().then(() => {
+        this.onCloseModal()
+        this.props.history.push(`/restaurants/${this.props.restaurant.id}`)
+      });
     } catch (error) {
       console.log(error);
       this.setState({ errors: ['Something went wrong :('] })
@@ -175,7 +178,7 @@ export default class RestaurantListItem extends React.Component {
               </FormGroup>
               <FormGroup check>
                 <Label check>
-                  <Input type="checkbox" checked={this.state.disabled} onClick={async () => {
+                  <Input type="checkbox" checked={this.state.disabled} onChange={async () => {
                     await this.setState({ disabled: !this.state.disabled })
                     console.log("disabled", this.state.disabled);
                   }} />{' '}

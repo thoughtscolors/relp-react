@@ -98,17 +98,17 @@ export default class RestaurantListItem extends React.Component {
 
     return (
       <Media className="box" key={restaurant.id}>
+        {this.state.errors.length > 0 && <div>
+          <Alert color="danger">
+            <ul>
+              {this.state.errors.map(error => (
+                <li>{error}</li>
+              ))}
+            </ul>
+          </Alert>
+        </div>}
         <Modal open={open} onClose={this.onCloseModal} center>
           <div className="restaurant-edit-modal-container">
-            {this.state.errors.length > 0 && <div>
-              <Alert color="danger">
-                <ul>
-                  {this.state.errors.map(error => (
-                    <li>{error}</li>
-                  ))}
-                </ul>
-              </Alert>
-            </div>}
             <h2 style={{ textAlign: "center" }}>Edit {`${name}`}</h2>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>

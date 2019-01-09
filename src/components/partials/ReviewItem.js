@@ -7,6 +7,8 @@ import Moment from 'react-moment';
 import { Star, Egg } from './Icons'
 import Comment from './Comment'
 import AddComment from './AddComment'
+import { Link } from 'react-router-dom'
+
 
 export default class ReviewItem extends Component {
 
@@ -53,28 +55,36 @@ export default class ReviewItem extends Component {
     return (
       <Media className="box" key={review.id}>
 
-
-        <Media left href="#">
+  return (
+    <Media className="box" key={review.id}>
+      <Media left href="#">
+        <Link to={`/users/${review.user_id}`}>
           <Media object src="https://cdn1.iconfinder.com/data/icons/female-avatars-vol-1/256/female-portrait-avatar-profile-woman-sexy-redhead-512.png"
           style={{width: 120, height: 120, marginRight: '2vw'}} alt={review.user_id + " image"} />
+        </Link>
+      </Media>
+      <Media body>
+        <Media heading>
+          <Link to={`/restaurants/${review.restaurant_id}`}>
+          {review.restaurant_name}
+          </Link>
         </Media>
-        <Media body>
-          <Media heading>
-            {review.rating > 0 ?
-              Array(review.rating).fill().map((star, i) => <Star key={i}/>) :
-              <Egg/>
-            }
-          </Media>
-            {review.content}
-            <div>
-              <Moment fromNow>{review.created_at}</Moment>
-            </div>
-            <div>
-            {comments.length === 0 &&
-              <Button color="secondary" size="md" onClick={() => this.fetchComments(review.id)}>
-                Show Comments
-              </Button>
-            }
+        <Media heading>
+          {review.rating > 0 ?
+            Array(review.rating).fill().map((star, i) => <Star key={i}/>) :
+            <Egg/>
+          }
+        </Media>
+          {review.content}
+          <div>
+            <Moment fromNow>{review.created_at}</Moment>
+          </div>
+          <div>
+          {this.state.comments.length === 0 &&
+            <Button color="secondary" size="md" onClick={() => this.fetchComments(review.id)}>
+              Show Comments
+            </Button>
+          }
             {comments.length > 0 &&
               <div>
                 <Button color="secondary" size="md" onClick={() => this.clearComments()}>

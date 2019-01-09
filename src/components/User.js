@@ -47,16 +47,18 @@ export default class User extends Component {
   }
 
   componentDidMount = () => {
+    this.fetchUser()
     this.fetchReviews()
   }
 
   render() {
-    const { reviews } = this.state
-    console.log("PROPS IN USER", this.props);
+    const { reviews, user } = this.state
+    console.log("PROPS IN USER", this.props)
+    console.log("STATE IN USER", this.state);
     return (
       <div className="container">
         <div style={{ textAlign: "center" }}>
-          <h1> {this.state.user.name} </h1>
+          <h1> {`${user.name}'s Reviews`} </h1>
         </div>
         <div>
           {reviews.length > 0 &&

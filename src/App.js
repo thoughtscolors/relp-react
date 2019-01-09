@@ -9,6 +9,8 @@ import Restaurants from './components/Restaurants'
 import Restaurant from './components/Restaurant'
 import NavBar from './components/shared/NavBar'
 import SearchPage from './components/SearchPage'
+import User from './components/User'
+import MyProfile from './components/MyProfile'
 
 export default class App extends Component {
 
@@ -94,6 +96,8 @@ export default class App extends Component {
             render={(props) => <CreateRestaurant {...props} loggedIn={loggedIn} userId={user.id}/>}
           />
           <Route path="/search" component={SearchPage} />
+          <Route path="/users/:id" render={(props) => <User {...props} />} />
+          <Route path="/profile" exact render={(props) => <MyProfile {...props} user={this.state.user}/>} />
         </div>
       </Router>
     )

@@ -30,6 +30,12 @@ export default class NavBar extends Component {
                 <NavItem className="nav-item">
                   <Link to="/search">Search!</Link>
                 </NavItem>
+                <NavItem className="nav-item">
+                  <Link to="/restaurants">Restaurant List</Link>
+                </NavItem>
+                <NavItem className="nav-item">
+                  <Link to="/profile">My Profile</Link>
+                </NavItem>
                 <NavItem className="nav-item" onClick={this.props.logout}>
                   <Link to="/">Logout</Link>
                 </NavItem>
@@ -38,7 +44,7 @@ export default class NavBar extends Component {
                 <NavItem className="nav-item">
                   <Link to="/signup">Signup</Link>
                 </NavItem>
-                <NavItem className="nav-item"> 
+                <NavItem className="nav-item">
                   <Link to="/">Login</Link>
                 </NavItem>
               </Nav>}

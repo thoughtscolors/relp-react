@@ -26,6 +26,7 @@ export default class Restaurants extends Component {
 
   componentDidMount = () => {
     this.fetchRestaurants()
+    console.log(this.props);
   }
 
   render() {
@@ -39,7 +40,11 @@ export default class Restaurants extends Component {
         <div>
         {restaurants.length > 0 &&
           restaurants.map(restaurant => (
-            <RestaurantListItem restaurant={restaurant} key={restaurant.id}/>
+            <RestaurantListItem
+              restaurant={restaurant}
+              key={restaurant.id}
+              user={this.props.user}
+            />
           )) }
         </div>
       </div>

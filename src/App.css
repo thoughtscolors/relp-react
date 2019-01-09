@@ -12,6 +12,11 @@
   box-shadow: 2px 4px 6px #EEEEEE;
 }
 
+.margins {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .nav-item {
   padding-left: 20px;
 }

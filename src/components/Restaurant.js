@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReviewItem from './partials/ReviewItem'
 import RestaurantListItem from './partials/RestaurantListItem'
+import AddReview from './partials/AddReview'
 
 export default class Restaurant extends Component {
 
@@ -52,13 +53,18 @@ export default class Restaurant extends Component {
 
   render() {
     const { reviews, restaurant } = this.state
-
+    console.log("PROPS IN RESTAURANT", this.props);
     return (
       <div className="container">
         <div>
-          <RestaurantListItem restaurant={restaurant}/>
+          <RestaurantListItem restaurant={restaurant} />
         </div>
         <div>
+          {!this.props.user.owner &&
+            <AddReview
+            restaurant_id={restaurant.id}
+            fetchReviews={this.fetchReviews}
+            user={this.props.user}/> }
           {reviews.length > 0 &&
             reviews.map(review => (
               <ReviewItem review={review} key={review.id}/>

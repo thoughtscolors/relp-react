@@ -66,8 +66,7 @@ export default class App extends Component {
         console.log(this.state.user.owner)
         return <OwnerHomePage user={this.state.user} {...props}/>
       } else {
-        console.log(this.state.user, 'OMGGGG')
-        return <SearchPage />
+        return <Restaurants user={this.state.user} {...props} />
       }
     } else {
       return <Login {...props} logIn={this.logIn} />
@@ -88,9 +87,9 @@ export default class App extends Component {
             path="/signup" exact
             render={(props) => <Signup {...props} signUpAndLogIn={this.signUpAndLogIn}/>}
           />
-          <Route path="/restaurants" exact component={Restaurants} />
-          <Route path="/restaurants/:id" component={Restaurant} />
-          <Route 
+          <Route path="/restaurants" exact render={(props) => <Restaurants {...props} user={this.state.user}/>} />
+          <Route path="/restaurants/:id" render={(props) => <Restaurant {...props} user={this.state.user}/>} />
+          <Route
             path="/addrestaurant" exact
             render={(props) => <CreateRestaurant {...props} loggedIn={loggedIn} userId={user.id}/>}
           />

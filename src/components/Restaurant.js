@@ -53,8 +53,7 @@ export default class Restaurant extends Component {
 
   render() {
     const { reviews, restaurant } = this.state
-    console.log("PROPS IN RESTAURANT", this.props);
-    
+
     return (
       <div className="container">
         <div>
@@ -68,7 +67,7 @@ export default class Restaurant extends Component {
             user={this.props.user}/> }
           {reviews.length > 0 &&
             reviews.map(review => (
-              <ReviewItem review={review} key={review.id}/>
+              <ReviewItem review={review} key={review.id} user={this.props.user} restaurant={restaurant}/>
             )) }
         </div>
       </div>

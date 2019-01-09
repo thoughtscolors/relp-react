@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import {
   Media,
-  Button
+  Button,
 } from 'reactstrap'
 import Moment from 'react-moment';
 import { Star, Egg } from './Icons'
 import Comment from './Comment'
+import AddComment from './AddComment'
 import { Link } from 'react-router-dom'
+
 
 export default class ReviewItem extends Component {
 
@@ -37,8 +39,21 @@ export default class ReviewItem extends Component {
     this.setState({ comments: [] })
   }
 
+  renderCommentBox = () => {
+    const { user, restaurant, review } = this.props
+    if (user.id === restaurant.user_id && review.restaurant_id === restaurant.id) {
+      return (
+        <AddComment user={this.props.user} restaurant={this.props.restaurant} review={this.props.review} fetchComments={this.fetchComments}/>
+      )
+    }
+  }
+
   render() {
-    const { review } = this.props
+    const { review } = this.props;
+    const { comments, } = this.state;
+
+    return (
+      <Media className="box" key={review.id}>
 
   return (
     <Media className="box" key={review.id}>
@@ -70,19 +85,18 @@ export default class ReviewItem extends Component {
               Show Comments
             </Button>
           }
-
-          {this.state.comments.length > 0 &&
-            <div>
-              <Button color="secondary" size="md" onClick={() => this.clearComments()}>
-                Hide Comments
-              </Button>
-              {this.state.comments.map(comment => <Comment comment={comment} key={comment.id}/>)}
+            {comments.length > 0 &&
+              <div>
+                <Button color="secondary" size="md" onClick={() => this.clearComments()}>
+                  Hide Comments
+                </Button>
+                {comments.map(comment => <Comment comment={comment} key={comment.id}/>)}
+              </div>
+            }
+            {this.renderCommentBox()}
             </div>
+        </Media>
 
-          }
-          </div>
       </Media>
-
-    </Media>
-  )}
+    )}
 }

@@ -82,7 +82,10 @@ export default class RestaurantListItem extends React.Component {
         })
       })
 
-      res.json().then(() => this.props.history.push(`/restaurants/${this.props.restaurant.id}`));
+      res.json().then(() => {
+        this.onCloseModal()
+        this.props.history.push(`/restaurants/${this.props.restaurant.id}`)
+      });
     } catch (error) {
       console.log(error);
       this.setState({ errors: ['Something went wrong :('] })
@@ -92,20 +95,20 @@ export default class RestaurantListItem extends React.Component {
   render() {
     const { restaurant } = this.props;
     const { open, name, description, address, city, state, zip, phone } = this.state;
-    console.log('history',this.props.history)
+
     return (
       <Media className="box" key={restaurant.id}>
+        {this.state.errors.length > 0 && <div>
+          <Alert color="danger">
+            <ul>
+              {this.state.errors.map(error => (
+                <li>{error}</li>
+              ))}
+            </ul>
+          </Alert>
+        </div>}
         <Modal open={open} onClose={this.onCloseModal} center>
           <div className="restaurant-edit-modal-container">
-            {this.state.errors.length > 0 && <div>
-              <Alert color="danger">
-                <ul>
-                  {this.state.errors.map(error => (
-                    <li>{error}</li>
-                  ))}
-                </ul>
-              </Alert>
-            </div>}
             <h2 style={{ textAlign: "center" }}>Edit {`${name}`}</h2>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
@@ -175,7 +178,7 @@ export default class RestaurantListItem extends React.Component {
               </FormGroup>
               <FormGroup check>
                 <Label check>
-                  <Input type="checkbox" checked={this.state.disabled} onClick={async () => {
+                  <Input type="checkbox" checked={this.state.disabled} onChange={async () => {
                     await this.setState({ disabled: !this.state.disabled })
                     console.log("disabled", this.state.disabled);
                   }} />{' '}

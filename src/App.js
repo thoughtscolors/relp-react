@@ -56,7 +56,6 @@ export default class App extends Component {
 
     res.json().then(users => users.forEach(user => {
       if (user.email === email) {
-        console.log(user)
         this.setState({ loggedIn: true, user })
       }
     }));

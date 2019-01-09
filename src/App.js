@@ -63,7 +63,6 @@ export default class App extends Component {
   renderHome = (props) => {
     if (this.state.loggedIn) {
       if (this.state.user.owner) {
-        console.log(this.state.user.owner)
         return <OwnerHomePage user={this.state.user} {...props}/>
       } else {
         return <Restaurants user={this.state.user} {...props} />
@@ -87,11 +86,11 @@ export default class App extends Component {
             path="/signup" exact
             render={(props) => <Signup {...props} signUpAndLogIn={this.signUpAndLogIn}/>}
           />
-          <Route path="/restaurants" exact render={(props) => <Restaurants {...props} user={this.state.user}/>} />
-          <Route path="/restaurants/:id" render={(props) => <Restaurant {...props} user={this.state.user}/>} />
+          <Route path="/restaurants" exact render={(props) => <Restaurants {...props} user={user}/>} />
+          <Route path="/restaurants/:id" render={(props) => <Restaurant {...props} user={user}/>} />
           <Route
             path="/addrestaurant" exact
-            render={(props) => <CreateRestaurant {...props} loggedIn={loggedIn} userId={user.id}/>}
+            render={(props) => <CreateRestaurant {...props} loggedIn={loggedIn}/>}
           />
           <Route path="/search" component={SearchPage} />
         </div>

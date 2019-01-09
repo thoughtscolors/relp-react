@@ -50,7 +50,9 @@ export default class ReviewItem extends Component {
       </Media>
       <Media body>
         <Media heading>
+          <Link to={`/restaurants/${review.restaurant_id}`}>
           {review.restaurant_name}
+          </Link>
         </Media>
         <Media heading>
           {review.rating > 0 ?

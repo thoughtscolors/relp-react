@@ -26,11 +26,9 @@ export default class Restaurants extends Component {
 
   componentDidMount = () => {
     this.fetchRestaurants()
-    console.log(this.props);
   }
 
   render() {
-
     const { restaurants } = this.state
     return (
       <div className="container">
@@ -39,13 +37,19 @@ export default class Restaurants extends Component {
         </div>
         <div>
         {restaurants.length > 0 &&
-          restaurants.map(restaurant => (
-            <RestaurantListItem
-              restaurant={restaurant}
-              key={restaurant.id}
-              user={this.props.user}
-            />
-          )) }
+          restaurants.map(restaurant => {
+            if (!restaurant.disabled) {
+              return (
+                <RestaurantListItem
+                  restaurant={restaurant}
+                  key={restaurant.id}
+                  user={this.props.user}
+                  history={this.props.history}
+                />
+              )
+            }
+            return null;
+        })}
         </div>
       </div>
     )

@@ -53,11 +53,11 @@ export default class Restaurant extends Component {
 
   render() {
     const { reviews, restaurant } = this.state
-    console.log("PROPS IN RESTAURANT", this.props);
+
     return (
       <div className="container">
         <div>
-          <RestaurantListItem restaurant={restaurant} />
+          <RestaurantListItem history={this.props.history} restaurant={restaurant} user={this.props.user} />
         </div>
         <div>
           {!this.props.user.owner &&
@@ -67,7 +67,7 @@ export default class Restaurant extends Component {
             user={this.props.user}/> }
           {reviews.length > 0 &&
             reviews.map(review => (
-              <ReviewItem review={review} key={review.id} user={this.props.user}/>
+              <ReviewItem review={review} key={review.id} user={this.props.user} restaurant={restaurant}/>
             )) }
         </div>
       </div>

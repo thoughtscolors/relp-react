@@ -40,7 +40,7 @@ export default class SearchPage extends Component {
         <div className="box">
           <Search search={this.fetchRestaurant}/>
         </div>
-        <RestaurantListItem restaurant={this.state.restaurant}/>
+        <RestaurantListItem restaurant={this.state.restaurant} user={this.props.user}/>
         {this.state.errors.length > 0 &&
           <Alert color="info">
             <ul>

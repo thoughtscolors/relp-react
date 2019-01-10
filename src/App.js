@@ -93,7 +93,8 @@ export default class App extends Component {
             path="/addrestaurant" exact
             render={(props) => <CreateRestaurant {...props} loggedIn={loggedIn}/>}
           />
-          <Route path="/search" component={SearchPage} />
+          <Route path="/search" render={(props) => <SearchPage {...props} user={user}/>} 
+          />
           <Route path="/users/:id" render={(props) => <User {...props} user={this.state.user}/>} />
           <Route path="/profile" exact render={(props) => <MyProfile {...props} user={this.state.user}/>} />
         </div>

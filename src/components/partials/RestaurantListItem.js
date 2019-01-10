@@ -1,5 +1,5 @@
 import React from 'react'
-import { 
+import {
   Media,
   Button,
   Input,
@@ -26,9 +26,6 @@ export default class RestaurantListItem extends React.Component {
   }
 
   componentDidMount = () => {
-    if (Object.keys(this.props.restaurant).length === 0) {
-      return null
-    }
   }
 
   onOpenModal = () => {
@@ -96,6 +93,10 @@ export default class RestaurantListItem extends React.Component {
     const { restaurant } = this.props;
     const { open, name, description, address, city, state, zip, phone } = this.state;
 
+    if (Object.keys(this.props.restaurant).length === 0) {
+      return null
+    }
+    
     return (
       <Media className="box" key={restaurant.id}>
         {this.state.errors.length > 0 && <div>

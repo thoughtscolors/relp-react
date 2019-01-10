@@ -18,6 +18,22 @@ export default class NavBar extends Component {
     this.setState({ isOpen: !this.state.isOpen })
   }
 
+  renderProfileLink = () => {
+    if (!this.props.owner) {
+      return (
+        <NavItem className="nav-item">
+          <Link to="/profile">My Profile</Link>
+        </NavItem>
+      )
+    } else {
+      return (
+        <NavItem className="nav-item">
+          <Link to="/">My Profile</Link>
+        </NavItem>
+      )
+    }
+  }
+
   render() {
     return (
       <div>
@@ -33,9 +49,7 @@ export default class NavBar extends Component {
                 <NavItem className="nav-item">
                   <Link to="/restaurants">Restaurant List</Link>
                 </NavItem>
-                <NavItem className="nav-item">
-                  <Link to="/profile">My Profile</Link>
-                </NavItem>
+                {this.renderProfileLink()}
                 <NavItem className="nav-item" onClick={this.props.logout}>
                   <Link to="/">Logout</Link>
                 </NavItem>

@@ -78,7 +78,7 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <NavBar loggedIn={loggedIn} logout={this.logout} />
+          <NavBar loggedIn={loggedIn} logout={this.logout} owner={user.owner}/>
           <Route
             path="/" exact
             render={(props) => this.renderHome(props)}

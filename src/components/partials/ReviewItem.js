@@ -49,7 +49,7 @@ export default class ReviewItem extends Component {
 
   render() {
     const { review } = this.props;
-    const { comments, } = this.state;
+    const { comments } = this.state;
 
     return (
       <Media className="box" key={review.id}>

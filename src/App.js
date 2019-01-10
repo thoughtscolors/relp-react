@@ -94,7 +94,7 @@ export default class App extends Component {
             render={(props) => <CreateRestaurant {...props} loggedIn={loggedIn}/>}
           />
           <Route path="/search" component={SearchPage} />
-          <Route path="/users/:id" render={(props) => <User {...props} />} />
+          <Route path="/users/:id" render={(props) => <User {...props} user={this.state.user}/>} />
           <Route path="/profile" exact render={(props) => <MyProfile {...props} user={this.state.user}/>} />
         </div>
       </Router>

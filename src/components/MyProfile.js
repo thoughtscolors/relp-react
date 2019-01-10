@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import ReviewItem from './partials/ReviewItem'
-import RestaurantListItem from './partials/RestaurantListItem'
-import AddReview from './partials/AddReview'
 
 export default class MyProfile extends Component {
 

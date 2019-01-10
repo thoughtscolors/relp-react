@@ -77,7 +77,7 @@ export default class User extends Component {
       const { user } = this.props
 
       if (user.id === this.state.user.id) {
-        this.setState({ errors: ["You can't follow yourself silly, yes we will remove that button"]})
+        this.setState({ errors: ["You can't follow yourself silly. Yes we will add logic to redirect to my profile instead"]})
         return
       }
 

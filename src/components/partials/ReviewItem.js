@@ -38,7 +38,8 @@ export default class ReviewItem extends Component {
   }
 
   render() {
-    const { review } = this.props
+    const { review, user } = this.props
+    console.log("PROPS IN REVIEW ITEM", review, user);
 
   return (
     <Media className="box" key={review.id}>
@@ -78,6 +79,7 @@ export default class ReviewItem extends Component {
               </Button>
               {this.state.comments.map(comment => <Comment comment={comment} key={comment.id}/>)}
             </div>
+            
 
           }
           </div>

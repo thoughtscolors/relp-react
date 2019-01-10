@@ -40,6 +40,7 @@ export default class ReviewItem extends Component {
 
   renderCommentBox = () => {
     const { user, restaurant, review } = this.props
+    if (!restaurant) return;
     if (user.id === restaurant.user_id && review.restaurant_id === restaurant.id) {
       return (
         <AddComment user={this.props.user} restaurant={this.props.restaurant} review={this.props.review} fetchComments={this.fetchComments}/>
@@ -49,7 +50,7 @@ export default class ReviewItem extends Component {
 
   render() {
     const { review } = this.props;
-    const { comments } = this.state;
+    const { comments, } = this.state;
 
     return (
       <Media className="box" key={review.id}>

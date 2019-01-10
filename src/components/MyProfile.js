@@ -42,7 +42,7 @@ export default class MyProfile extends Component {
         <div>
           {reviews.length > 0 &&
             reviews.map(review => (
-              <ReviewItem review={review} key={review.id}/>
+              <ReviewItem review={review} key={review.id} user={this.props.user} restaurantId={review.restaurant_id}/>
             )) }
         </div>
       </div>
